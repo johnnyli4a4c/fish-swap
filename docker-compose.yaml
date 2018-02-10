@@ -6,3 +6,4 @@ services:
       dockerfile: docker/Dockerfile
     volumes:
       - ./app:/app
+    container_name: app
