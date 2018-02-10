@@ -1,1 +1,4 @@
-# fish-swap
+# Setup
+```
+docker-compose up
+```
