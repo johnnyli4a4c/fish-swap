@@ -2,32 +2,26 @@ import React, { Component } from 'react';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 
-const styles = {
-    customWidth: {
-      width: 200,
-    },
-  };
+export default class CountryDropDownMenu extends Component {
 
-export default class CountryDropDownMenu extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {value: 1};
-      }
-    
-    handleChange = ((event, index, value) => (
-        // TODO: Filter by country
-        this.setState({value})
-    ));
+  handleOnChange = ((event, index, value) =>{
+    this.setState({value})
+    this.props.updateState(
+      this.props.state.selectedFish,
+      value
+  )});
 
-    render() {
-        return (
-          <div>
-            <DropDownMenu value={this.state.value} onChange={this.handleChange}>
-            {this.props.countries.map( (country, index) => (
-              <MenuItem value={index} primaryText={country}/>
-              ))}
-            </DropDownMenu>
-          </div>
-        );
-      }
+  render() {
+    return (
+      <DropDownMenu value={this.props.state.selectedCountry} onChange={this.handleOnChange}>
+      {this.props.countries.map((country, index) => 
+        <MenuItem 
+          key={index} 
+          value={index} 
+          primaryText={country.name}
+        />
+      )}
+      </DropDownMenu>
+    );
+  }
 }

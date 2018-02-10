@@ -7,27 +7,67 @@ import ToDo from './Screens/ToDo.js';
 import Reboot from 'material-ui/Reboot';
 import './App.css';
 
+const mock_fish_data = [
+  {
+    id: 1,
+    name: 'Salmon',
+  },
+  {
+    id: 2,
+    name: 'Sake',
+  },
+  {
+    id: 3,
+    name: 'Sea Urchin',
+  },
+]; 
+
+const mock_countries_data = [
+  {
+    id: 0,
+    name: 'None'
+  },
+  {
+    id: 1,
+    name: 'Canada'
+  },
+  {
+    id: 2,
+    name: 'US'
+  },
+  {
+    id: 3,
+    name: 'Japan'
+  }
+];
+
 const mock_price_data = [
   {
-    fish: 'Salmon',
+    fish: {
+      id: 1,
+      name: 'Salmon' 
+    },
     min: '$1',
     max: '$3',
     average: '$2',
-    country: 'Canada',
+    country: {
+      id: 1,
+      name: 'Canada'
+    }
   },
   {
-    fish: 'Salmon',
+    fish: {
+      id: 2,
+      name: 'Sake' 
+    },
     min: '$3',
     max: '$5',
     average: '$4',
-    country: 'US',
+    country: {
+      id: 2,
+      name: 'US'
+    }
   },
-];
-
-const mock_countries_data = [
-  "Canada",
-  "US",
-  "Japan"
 ];
 
 class App extends Component {
@@ -56,6 +96,7 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/prices" 
               component={Prices}
+              fish={mock_fish_data}
               prices={mock_price_data} 
               countries={mock_countries_data}/>
             <Route path="/add" component={ToDo} />
