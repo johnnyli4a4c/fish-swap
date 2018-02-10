@@ -1,31 +1,43 @@
 import React, { Component } from 'react';
-import './App.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import MainMenu from './Components/MainMenu.js';
+import { withRouter, Redirect, Route } from 'react-router-dom';
+import MainTemplate from './Components/MainTemplate.js';
 import Login from './Screens/Login.js';
 import Prices from './Screens/Prices.js';
-
-const mock_price_data = [];
+import ToDo from './Screens/ToDo.js';
+import Reboot from 'material-ui/Reboot';
+import './App.css';
 
 class App extends Component {
   render() {
+    const { pathname } = this.props.location;
+    const mainScreenStyles = {
+      margin: 0,
+      textAlign: 'left'
+    };
+    const mainDrawerStyles = {
+      position: 'relative'
+    };
     return (
-      <MuiThemeProvider>
-        <div className="App">
-          <header className="App-header">
-            <h1 className="App-title">Fishr Price</h1>
-          </header>
-          <MainMenu />
-          <section>
-            <Login />
+      <div className="App">
+        <Reboot />
+        <MainTemplate
+          title="Fishr Price"
+          style={mainDrawerStyles}
+        >
+          <section style={mainScreenStyles}>
+            {
+              pathname === '/' && 
+                <Redirect from="/" to="/login" />
+            }
+            <Route path="/login" component={Login} />
+            <Route path="/prices" component={Prices} />
+            <Route path="/add" component={ToDo} />
+            <Route path="/history" component={ToDo} />
           </section>
-          <section>
-            <Prices prices={mock_price_data} />
-          </section>
-        </div>
-      </MuiThemeProvider>
+        </MainTemplate>
+      </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
