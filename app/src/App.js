@@ -17,6 +17,7 @@ class App extends Component {
     const mainDrawerStyles = {
       position: 'relative'
     };
+
     return (
       <div className="App">
         <Reboot />
@@ -26,8 +27,8 @@ class App extends Component {
         >
           <section style={mainScreenStyles}>
             {
-              pathname === '/' && 
-                <Redirect from="/" to="/login" />
+              pathname === '/' &&
+                <Redirect to="/login" />
             }
             <Route path="/login" component={Login} />
             <Route path="/prices" component={Prices} />

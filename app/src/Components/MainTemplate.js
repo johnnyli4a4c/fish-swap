@@ -109,19 +109,26 @@ const options = [
 
 
 class MainTemplate extends React.Component {
-  state = {
-    open: true,
-    selectedIndex: options.findIndex(option => {
-      return this.props.location.pathname === option.link;
-    })
-  };
+  getCurrentRouteIndex = (pathname) => {
+    return options.findIndex(option => {
+      return pathname === option.link
+    });
+  }
 
   handleDrawerToggle = () => {
     this.setState({ open: !this.state.open });
-  };
+  }
 
   handleMenuItemClick = index => e => {
     this.setState({selectedIndex: index});
+  }
+  state = {
+    open: true,
+    selectedIndex: this.getCurrentRouteIndex(this.props.location.pathname)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({selectedIndex: this.getCurrentRouteIndex(nextProps.location.pathname)});
   }
 
   render() {
