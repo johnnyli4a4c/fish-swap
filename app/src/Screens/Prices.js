@@ -18,8 +18,8 @@ class Prices extends Component {
           })}
         </ul>
         <p className="Prices-intro">
-          <CountryDropDownMenu/>
-          <PriceTable/>
+          <CountryDropDownMenu countries={this.props.countries}/>
+          <PriceTable prices={this.props.prices}/>
         </p>
       </div>
     );

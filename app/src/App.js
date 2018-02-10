@@ -7,6 +7,13 @@ import ToDo from './Screens/ToDo.js';
 import Reboot from 'material-ui/Reboot';
 import './App.css';
 
+const mock_price_data = [];
+const mock_countries_data = [
+  "Canada",
+  "US",
+  "Japan"
+];
+
 class App extends Component {
   render() {
     const { pathname } = this.props.location;
@@ -31,7 +38,10 @@ class App extends Component {
                 <Redirect to="/login" />
             }
             <Route path="/login" component={Login} />
-            <Route path="/prices" component={Prices} />
+            <Route path="/prices" 
+              component={Prices}
+              prices={mock_price_data} 
+              countries={mock_countries_data}/>
             <Route path="/add" component={ToDo} />
             <Route path="/history" component={ToDo} />
           </section>

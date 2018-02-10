@@ -14,15 +14,18 @@ export default class CountryDropDownMenu extends React.Component {
         this.state = {value: 1};
       }
     
-      handleChange = (event, index, value) => this.setState({value});
+    handleChange = ((event, index, value) => (
+        // TODO: Filter by country
+        this.setState({value})
+    ));
 
     render() {
         return (
           <div>
             <DropDownMenu value={this.state.value} onChange={this.handleChange}>
-              <MenuItem value={1} primaryText="Canada" />
-              <MenuItem value={2} primaryText="US" />
-            
+            {this.props.countries.map( (country, index) => (
+              <MenuItem value={index} primaryText={country}/>
+              ))}
             </DropDownMenu>
           </div>
         );
