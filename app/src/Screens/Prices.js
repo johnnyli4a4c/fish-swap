@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import CountryDropDownMenu from '../Components/CountryDropDownMenu.js';
 
 class Prices extends Component {
   state = {
@@ -29,6 +30,7 @@ class Prices extends Component {
           })}
         </ul>
         <p className="Prices-intro">
+          <CountryDropDownMenu/>
           <Table
             height={this.state.height}
             fixedHeader={this.state.fixedHeader}
