@@ -27,39 +27,41 @@ export default class PriceTable extends React.Component {
     render() {
         return (
             <Table
-            height={this.state.height}
-            fixedHeader={this.state.fixedHeader}
-            fixedFooter={this.state.fixedFooter}
-            selectable={this.state.selectable}
-            multiSelectable={this.state.multiSelectable}
-          >
-            <TableHeader
-              displaySelectAll={this.state.showCheckboxes}
-              adjustForCheckbox={this.state.showCheckboxes}
-              enableSelectAll={this.state.enableSelectAll}
+              height={this.state.height}
+              fixedHeader={this.state.fixedHeader}
+              fixedFooter={this.state.fixedFooter}
+              selectable={this.state.selectable}
+              multiSelectable={this.state.multiSelectable}
             >
-              <TableRow>
-                <TableHeaderColumn tooltip="The Fish">Fish</TableHeaderColumn>
-                <TableHeaderColumn tooltip="Min Price">Min</TableHeaderColumn>
-                <TableHeaderColumn tooltip="Max Price">Max</TableHeaderColumn>
-                <TableHeaderColumn tooltip="Average Price">Average</TableHeaderColumn>
-                <TableHeaderColumn tooltip="The Country">Country</TableHeaderColumn>
-              </TableRow>
-            </TableHeader>
-            <TableBody
-            displayRowCheckbox={this.state.showCheckboxes}
-            deselectOnClickaway={this.state.deselectOnClickaway}
-            showRowHover={this.state.showRowHover}
-            stripedRows={this.state.stripedRows}
-            >              
-            <TableRow key="0">
-                <TableRowColumn>Salmon</TableRowColumn>
-                <TableRowColumn>$1</TableRowColumn>
-                <TableRowColumn>$3</TableRowColumn>
-                <TableRowColumn>$2</TableRowColumn>
-                <TableRowColumn>Canada</TableRowColumn>
-              </TableRow>
-          </TableBody>
+              <TableHeader
+                displaySelectAll={this.state.showCheckboxes}
+                adjustForCheckbox={this.state.showCheckboxes}
+                enableSelectAll={this.state.enableSelectAll}
+              >
+                <TableRow>
+                  <TableHeaderColumn tooltip="The Fish">Fish</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Min Price">Min</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Max Price">Max</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Average Price">Average</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="The Country">Country</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody
+                displayRowCheckbox={this.state.showCheckboxes}
+                deselectOnClickaway={this.state.deselectOnClickaway}
+                showRowHover={this.state.showRowHover}
+                stripedRows={this.state.stripedRows}
+              >        
+                {this.props.prices.map( (price, index) => (
+                  <TableRow key={index}>
+                    <TableRowColumn>{price.fish}</TableRowColumn>
+                    <TableRowColumn>{price.min}</TableRowColumn>
+                    <TableRowColumn>{price.max}</TableRowColumn>
+                    <TableRowColumn>{price.average}</TableRowColumn>
+                    <TableRowColumn>{price.country}</TableRowColumn>
+                  </TableRow>
+                  ))}
+              </TableBody>
           </Table>
         );
       }

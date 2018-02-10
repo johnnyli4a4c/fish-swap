@@ -7,7 +7,23 @@ import ToDo from './Screens/ToDo.js';
 import Reboot from 'material-ui/Reboot';
 import './App.css';
 
-const mock_price_data = [];
+const mock_price_data = [
+  {
+    fish: 'Salmon',
+    min: '$1',
+    max: '$3',
+    average: '$2',
+    country: 'Canada',
+  },
+  {
+    fish: 'Salmon',
+    min: '$3',
+    max: '$5',
+    average: '$4',
+    country: 'US',
+  },
+];
+
 const mock_countries_data = [
   "Canada",
   "US",
