@@ -6,6 +6,7 @@ import Prices from './Screens/Prices.js';
 import TransactionHistory from './Screens/TransactionHistory';
 import ToDo from './Screens/ToDo.js';
 import Reboot from 'material-ui/Reboot';
+import Paper from 'material-ui/Paper';
 import './App.css';
 
 class App extends Component {
@@ -13,7 +14,8 @@ class App extends Component {
     const { pathname } = this.props.location;
     const mainScreenStyles = {
       margin: 0,
-      textAlign: 'left'
+      textAlign: 'left',
+      padding: 20
     };
     const mainDrawerStyles = {
       position: 'relative'
@@ -26,7 +28,7 @@ class App extends Component {
           title="Fishr Price"
           style={mainDrawerStyles}
         >
-          <section style={mainScreenStyles}>
+          <Paper style={mainScreenStyles}>
             {
               pathname === '/' &&
                 <Redirect to="/login" />
@@ -35,7 +37,7 @@ class App extends Component {
             <Route path="/prices" component={Prices}/>
             <Route path="/add" component={ToDo} />
             <Route path="/history" component={TransactionHistory} />
-          </section>
+          </Paper>
         </MainTemplate>
       </div>
     );

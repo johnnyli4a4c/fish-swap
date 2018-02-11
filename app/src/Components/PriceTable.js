@@ -4,7 +4,6 @@ import Table, {
   TableCell,
   TableRow,
 } from 'material-ui/Table';
-import Paper from 'material-ui/Paper';
 import PriceTableHead from '../Components/PriceTableHead.js' 
 import FilterFishTextField from '../Components/FilterFishTextField.js' 
 
@@ -45,33 +44,31 @@ class PriceTable extends React.Component {
     const { data, order, orderBy, filterBy } = this.state;
   
     return (
-      <Paper>
-        <div>
-          <FilterFishTextField onRequestFilter={this.handleRequestFilter}/>
-          <Table>
-            <PriceTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={this.handleRequestSort}
-            />
-            <TableBody>
-              {data.filter(function (price) {
-                return filterBy === '' || price.fish.name.toLowerCase().indexOf(filterBy.toLowerCase()) !== -1;
-              }).map(price => {
-                return (
-                  <TableRow hover key={price.fish.id}>
-                    <TableCell>{price.fish.name}</TableCell>
-                    <TableCell>{price.min}</TableCell>
-                    <TableCell>{price.max}</TableCell>
-                    <TableCell>{price.average}</TableCell>
-                    <TableCell>{price.country.name}</TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </div>
-      </Paper>
+      <div>
+        <FilterFishTextField onRequestFilter={this.handleRequestFilter}/>
+        <Table>
+          <PriceTableHead
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={this.handleRequestSort}
+          />
+          <TableBody>
+            {data.filter(function (price) {
+              return filterBy === '' || price.fish.name.toLowerCase().indexOf(filterBy.toLowerCase()) !== -1;
+            }).map(price => {
+              return (
+                <TableRow hover key={price.fish.id}>
+                  <TableCell>{price.fish.name}</TableCell>
+                  <TableCell>{price.min}</TableCell>
+                  <TableCell>{price.max}</TableCell>
+                  <TableCell>{price.average}</TableCell>
+                  <TableCell>{price.country.name}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
     );
   }
 }
