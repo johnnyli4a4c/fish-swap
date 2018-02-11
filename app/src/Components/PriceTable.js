@@ -43,6 +43,13 @@ class PriceTable extends React.Component {
     const { order, orderBy, filterBy } = this.state;
     const { prices, countries, fishes } = this.props;
 
+    const filterPrice = (price) => {
+      return fishes.length !== 0 && (filterBy === '' || 
+        fishes.find(fish => {
+          return fish.id === price.fishId
+        }).name.toLowerCase().indexOf(filterBy.toLowerCase()) !== -1)
+    }
+
     return (
       <div>
         <FilterFishTextField onRequestFilter={this.handleRequestFilter}/>
@@ -53,11 +60,9 @@ class PriceTable extends React.Component {
             onRequestSort={this.handleRequestSort}
           />
           <TableBody>
-            {prices.filter(function (price) {
-              return filterBy === '' || price.fish.name.toLowerCase().indexOf(filterBy.toLowerCase()) !== -1;
-            }).map(price => {
+            {prices.filter(filterPrice).map(price => {
               return (
-                <TableRow hover key={price.fishId}>
+                <TableRow hover key={price.fishId + '-' + price.countryId }>
                   <TableCell>
                     {fishes.length !== 0 &&
                       fishes.find(fish => {
