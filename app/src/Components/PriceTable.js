@@ -5,7 +5,6 @@ import Table, {
   TableRow,
 } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
 import PriceTableHead from '../Components/PriceTableHead.js' 
 import FilterFishTextField from '../Components/FilterFishTextField.js' 
 
@@ -57,7 +56,7 @@ class PriceTable extends React.Component {
             />
             <TableBody>
               {data.filter(function (price) {
-                return filterBy === '' || price.fish.name.toLowerCase().indexOf(filterBy.toLowerCase()) != -1;
+                return filterBy === '' || price.fish.name.toLowerCase().indexOf(filterBy.toLowerCase()) !== -1;
               }).map(price => {
                 return (
                   <TableRow hover key={price.fish.id}>

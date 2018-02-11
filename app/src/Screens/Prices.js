@@ -9,7 +9,6 @@ class Prices extends Component {
     return (
       <div className="Prices">
         <header className="Prices-header">
-          <h1 className="Prices-title"></h1>
         </header>
           <PriceTable prices={prices}
           />

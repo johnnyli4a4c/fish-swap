@@ -33,7 +33,7 @@ class FilterFishTextField extends React.Component {
   }
 
   render() {
-    const { classes, filterBy } = this.props;
+    const { classes } = this.props;
     return (
       <TextField
         label="Filter by Fish"
