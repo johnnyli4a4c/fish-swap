@@ -128,12 +128,12 @@ class Transaction extends Component {
     return (
       <div>
         <TransactionForm
-            handlequantityChanges = {this.handleDateChanges}
+            handleDateChanges = {this.handleDateChanges}
             handlePriceChanges = {this.handlePriceChanges}
             handleFishChanges = {this.handleFishChanges}
             handleQuantityChanges = {this.handleQuantityChanges}
+            handleCountryChanges = {this.handleCountryChanges}
             handleBuyerNameChanges = {this.handleBuyerNameChanges}
-            handleBuyerNumberChanges = {this.handleBuyerNumberChanges}
             handleOnSend = {this.handleOnSend}
         />
       </div>
