@@ -1,91 +1,122 @@
-import React, { Component } from 'react';
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-  } from 'material-ui/Table';
+import React from 'react';
+import Table, {
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+} from 'material-ui/Table';
+import Paper from 'material-ui/Paper';
 
-export default class PriceTable extends Component {
-  attributes = {
-    fixedHeader: true,
-    fixedFooter: true,
-    stripedRows: false,
-    showRowHover: true,
-    selectable: false,
-    multiSelectable: false,
-    enableSelectAll: false,
-    deselectOnClickaway: false,
-    showCheckboxes: false,
-    height: '300px',
+let counter = 0;
+function createData(fish, min, max, avg, country) {
+  counter += 1;
+  return { id: counter, fish, min, max, avg, country };
+}
+
+const headerData = [
+  { id: 'fish', label: 'Fish' },
+  { id: 'min', label: 'Min Price' },
+  { id: 'max', label: 'Max Price' },
+  { id: 'avg', label: 'Avg Price' },
+  { id: 'country', label: 'Country' },
+];
+
+class PriceTableHead extends React.Component {
+  createSortHandler = property => event => {
+    this.props.onRequestSort(event, property);
   };
 
-  constructor(props) {
-    super(props);
+  render() {
+    const { order, orderBy } = this.props;
+
+    return (
+      <TableHead>
+        <TableRow>
+          {headerData.map(header => {
+            return (
+              <TableCell
+                key={header.id}
+                sortDirection={orderBy === header.id ? order : false}
+              >
+                <TableSortLabel
+                  active={orderBy === header.id}
+                  direction={order}
+                  onClick={this.createSortHandler(header.id)}
+                >
+                  {header.label}
+                </TableSortLabel>
+              </TableCell>
+            );
+          }, this)}
+        </TableRow>
+      </TableHead>
+    );
+  }
+}
+
+class PriceTable extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
     this.state = {
-      filteredPrices: this.props.prices.filter(
-        price => 
-          (price.fish.id === this.props.state.selectedFish && 
-          price.country.id === this.props.state.selectedCountry) || true
-      )
+      order: 'asc',
+      orderBy: '',
+      data: [
+        createData('Salmon', 1, 3, 2, 'Canada'),
+        createData('Sake', 2, 4, 3, 'US'),
+      ],
     };
+
+    console.log(props)
   }
 
-  filterPrices = (() => {
-    return this.props.prices.filter(
-      price => 
-        (this.props.state.selectedFish === 0 && 
-          this.props.state.selectedCountry === 0) ||
-        (this.props.state.selectedFish === 0 &&
-          price.country.id === this.props.state.selectedCountry) ||
-        (price.fish.id === this.props.state.selectedFish && 
-          this.props.state.selectedCountry === 0) ||
-        (price.fish.id === this.props.state.selectedFish && 
-        price.country.id === this.props.state.selectedCountry)
-    )})
+  handleRequestSort = (event, property) => {
+    const orderBy = property;
+    let order = 'desc';
+
+    if (this.state.orderBy === property && this.state.order === 'desc') {
+      order = 'asc';
+    }
+
+    const data =
+      order === 'desc'
+        ? this.state.data.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
+        : this.state.data.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1));
+
+    this.setState({ data, order, orderBy });
+  };
 
   render() {
-      return (
-          <Table
-            height={this.attributes.height}
-            fixedHeader={this.attributes.fixedHeader}
-            fixedFooter={this.attributes.fixedFooter}
-            selectable={this.attributes.selectable}
-            multiSelectable={this.attributes.multiSelectable}
-          >
-            <TableHeader
-              displaySelectAll={this.attributes.showCheckboxes}
-              adjustForCheckbox={this.attributes.showCheckboxes}
-              enableSelectAll={this.attributes.enableSelectAll}
-            >
-              <TableRow>
-                <TableHeaderColumn tooltip="The Fish">Fish</TableHeaderColumn>
-                <TableHeaderColumn tooltip="Min Price">Min</TableHeaderColumn>
-                <TableHeaderColumn tooltip="Max Price">Max</TableHeaderColumn>
-                <TableHeaderColumn tooltip="Average Price">Average</TableHeaderColumn>
-                <TableHeaderColumn tooltip="The Country">Country</TableHeaderColumn>
-              </TableRow>
-            </TableHeader>
-            <TableBody
-              displayRowCheckbox={this.attributes.showCheckboxes}
-              deselectOnClickaway={this.attributes.deselectOnClickaway}
-              showRowHover={this.attributes.showRowHover}
-              stripedRows={this.attributes.stripedRows}
-            >        
-
-              {this.filterPrices().map( (price, index) => (
-                <TableRow key={index}>
-                  <TableRowColumn>{price.fish.name}</TableRowColumn>
-                  <TableRowColumn>{price.min}</TableRowColumn>
-                  <TableRowColumn>{price.max}</TableRowColumn>
-                  <TableRowColumn>{price.average}</TableRowColumn>
-                  <TableRowColumn>{price.country.name}</TableRowColumn>
-                </TableRow>
-                ))}
+    const { data, order, orderBy } = this.state;
+  
+    return (
+      <Paper>
+        <div>
+          <Table>
+            <PriceTableHead
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={this.handleRequestSort}
+            />
+            <TableBody>
+              {data.map(price => {
+                return (
+                  <TableRow hover key={price.id}>
+                    <TableCell>{price.fish}</TableCell>
+                    <TableCell>{price.min}</TableCell>
+                    <TableCell>{price.max}</TableCell>
+                    <TableCell>{price.avg}</TableCell>
+                    <TableCell>{price.country}</TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
-        </Table>
-      );
-    }
+          </Table>
+        </div>
+      </Paper>
+    );
+  }
 }
+
+export default PriceTable;

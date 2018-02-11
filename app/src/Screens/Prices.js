@@ -6,18 +6,18 @@ import PriceTable from '../Components/PriceTable.js';
 
 class Prices extends Component {
 
-  state = {
-    selectedFish: 0,
-    selectedCountry: 0,
-  };
+  // state = {
+  //   selectedFish: 0,
+  //   selectedCountry: 0,
+  // };
 
-  updateState = ((selectedFish, selectedCountry) => {
-    this.setState({
-      selectedFish: selectedFish,
-      selectedCountry: selectedCountry
-    })
-    console.log(this.state);
-  });
+  // updateState = ((selectedFish, selectedCountry) => {
+  //   this.setState({
+  //     selectedFish: selectedFish,
+  //     selectedCountry: selectedCountry
+  //   })
+  //   console.log(this.state);
+  // });
 
   render() {
     const { prices } = this.props;
@@ -32,7 +32,7 @@ class Prices extends Component {
             return <li key={price.fishId + "-" + price.countryId}>{JSON.stringify(price)}</li>
           })}
         </ul>
-          <FishFilter 
+          {/* <FishFilter 
             state={this.state} 
             updateState={this.updateState} 
             fish={this.props.fish}
@@ -41,7 +41,7 @@ class Prices extends Component {
             state={this.state}
             updateState={this.updateState} 
             countries={this.props.countries}
-          />
+          /> */}
           <PriceTable 
             state={this.state} 
             prices={this.props.prices}

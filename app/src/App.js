@@ -96,9 +96,9 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/prices" 
               component={Prices}
-              fish={mock_fish_data}
-              prices={mock_price_data} 
-              countries={mock_countries_data}/>
+              fish={this.mock_fish_data}
+              prices={this.mock_price_data} 
+              countries={this.mock_countries_data}/>
             <Route path="/add" component={ToDo} />
             <Route path="/history" component={ToDo} />
           </section>
