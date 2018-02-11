@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 import FishSwapApp from './Reducers';
-import { addTransaction, addPrice } from './Actions'
+import { addTransaction } from './Actions'
 import './index.css';
 import Theme from './Themes/Theme.js';
 import { MuiThemeProvider } from 'material-ui/styles';

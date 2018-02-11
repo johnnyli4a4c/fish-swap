@@ -21,9 +21,9 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <LoginForm
+        {/* <LoginForm
           // login = {this.handleIsLoggedIn}
-        />
+        /> */}
       </div>
     );
   }
