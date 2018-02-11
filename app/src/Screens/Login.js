@@ -10,7 +10,7 @@ class Login extends Component {
   //   };
 
     // this.handleIsLoggedIn = this.handleIsLoggedIn.bind(this)
-  }
+  // }
 
   // handleIsLoggedIn = (value) => {
   //   this.setState({
