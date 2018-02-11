@@ -8,6 +8,7 @@ import ToDo from './Screens/ToDo.js';
 import Reboot from 'material-ui/Reboot';
 import Paper from 'material-ui/Paper';
 import './App.css';
+import Transaction from './Screens/Transaction.js';
 
 class App extends Component {
   render() {
@@ -34,9 +35,9 @@ class App extends Component {
                 <Redirect to="/login" />
             }
             <Route path="/login" component={Login} />
-            <Route path="/prices" component={Prices}/>
-            <Route path="/add" component={ToDo} />
-            <Route path="/history" component={TransactionHistory} />
+            <Route path="/prices" component={Prices} />
+            <Route path="/add" component={Transaction} />
+            <Route path="/history" component={ToDo} />
           </Paper>
         </MainTemplate>
       </div>

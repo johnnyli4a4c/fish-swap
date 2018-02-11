@@ -11,6 +11,22 @@ export const addPrice = price => {
   }
 }
 
+export const addNewTransaction = (data) => {
+  console.log(data)
+  return dispatch => {
+    dispatch(addTransaction);
+    return axios.post(route('/transactions', data))
+      .then(
+        response => {
+          console.log(response)
+          // dispatch(authenticate(response.data));
+        },
+        error => {
+          // console.log(error);
+        }
+      )}
+    }
+
 export const requestTransactions = () => {
   return {
     type: 'REQUEST_TRANSACTIONS'
@@ -130,6 +146,26 @@ export const loadFishes = fishes => {
   };
 }
 
+export const authenticateUser = (data) => {
+  console.log(data)
+  let newData = {
+    phoneNumber: data.phoneNumber,
+    password: data.password
+  };
+  return dispatch => {
+    dispatch(authenticate);
+    return axios.post(route('/login', newData))
+      .then(
+        response => {
+          console.log(response)
+          // dispatch(authenticate(response.data));
+        },
+        error => {
+          // console.log(error);
+        }
+      )}
+    }
+    
 export const requestBuyers = () => {
   return {
     type: 'REQUEST_BUYERS'
@@ -151,6 +187,12 @@ export const fetchBuyers = () => {
   };
 }
 
+export const authenticate = login => {
+  return {
+    type: "AUTHENTICATE",
+    login
+  }
+}
 export const loadBuyers = buyers => {
   return {
     type: "LOAD_BUYERS",
