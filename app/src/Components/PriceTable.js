@@ -42,7 +42,9 @@ class PriceTable extends React.Component {
   render() {
     const { order, orderBy, filterBy } = this.state;
     const { prices, countries, fishes } = this.props;
-
+    const twoDecimals = num => {
+      return parseFloat(Math.round(num * 100) / 100).toFixed(2);
+    }
     const filterPrice = (price) => {
       return fishes.length !== 0 && (filterBy === '' || 
         fishes.find(fish => {
@@ -70,9 +72,9 @@ class PriceTable extends React.Component {
                       }).name
                     }
                   </TableCell>
-                  <TableCell>{price.min}</TableCell>
-                  <TableCell>{price.max}</TableCell>
-                  <TableCell>{price.average}</TableCell>
+                  <TableCell>{twoDecimals(price.min)}</TableCell>
+                  <TableCell>{twoDecimals(price.max)}</TableCell>
+                  <TableCell>{twoDecimals(price.average)}</TableCell>
                   <TableCell>
                     {countries.length !== 0 &&
                       countries.find(country => {
