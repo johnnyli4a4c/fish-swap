@@ -7,40 +7,6 @@ import ToDo from './Screens/ToDo.js';
 import Reboot from 'material-ui/Reboot';
 import './App.css';
 
-const mock_fish_data = [
-  {
-    id: 1,
-    name: 'Salmon',
-  },
-  {
-    id: 2,
-    name: 'Sake',
-  },
-  {
-    id: 3,
-    name: 'Sea Urchin',
-  },
-]; 
-
-const mock_countries_data = [
-  {
-    id: 0,
-    name: 'None'
-  },
-  {
-    id: 1,
-    name: 'Canada'
-  },
-  {
-    id: 2,
-    name: 'US'
-  },
-  {
-    id: 3,
-    name: 'Japan'
-  }
-];
-
 class App extends Component {
   render() {
     const { pathname } = this.props.location;
@@ -65,10 +31,7 @@ class App extends Component {
                 <Redirect to="/login" />
             }
             <Route path="/login" component={Login} />
-            <Route path="/prices" 
-              component={Prices}
-              fish={this.mock_fish_data}
-              countries={this.mock_countries_data}/>
+            <Route path="/prices" component={Prices}/>
             <Route path="/add" component={ToDo} />
             <Route path="/history" component={ToDo} />
           </section>
