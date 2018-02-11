@@ -11,6 +11,23 @@ export const addPrice = price => {
   }
 }
 
+export const addNewTransaction = (data) => {
+  console.log(data)
+  return dispatch => {
+    dispatch(addTransaction);
+    return axios.post(route('/transactions', data))
+      .then(
+        response => {
+          console.log(response)
+          // dispatch(authenticate(response.data));
+        },
+        error => {
+          // console.log(error);
+        }
+      )
+  };
+}
+
 export const addTransaction = transaction => {
   return {
     type: 'ADD_TRANSACTION',
@@ -100,4 +117,35 @@ export const loadFishes = fishes => {
     type: "LOAD_FISHES",
     fishes
   };
+}
+
+export const authenticateUser = (data) => {
+  console.log(data)
+  let newData = JSON.stringify({
+    phoneNumber: data.phoneNumber,
+    password: data.password
+  })
+  return dispatch => {
+    dispatch(authenticate);
+    return axios.post(route('/login', newData, {
+      headers: {
+        'Content-Type': 'application/json',
+    }}))
+      .then(
+        response => {
+          console.log(response)
+          // dispatch(authenticate(response.data));
+        },
+        error => {
+          // console.log(error);
+        }
+      )
+  };
+}
+
+export const authenticate = login => {
+  return {
+    type: "AUTHENTICATE",
+    login
+  }
 }

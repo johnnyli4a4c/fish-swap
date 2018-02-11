@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import TransactionForm from '../Components/TransactionForm.js'
+import { addNewTransaction } from '../Actions';
 
 class Transaction extends Component {
   constructor(props) {
@@ -10,8 +12,8 @@ class Transaction extends Component {
       price: "",
       fish: "",
       quantity: "",
-      buyer: "",
-      buyerNumber: ""
+      country: "",
+      buyer: ""
     }
   }
 
@@ -39,16 +41,16 @@ class Transaction extends Component {
       quantity: val
     })
   };
+  
+  handleCountryChanges = (val) => {
+    this.setState({
+      country: val
+    })
+  };
 
   handleBuyerNameChanges = (val) => {
     this.setState({
       buyer: val
-    })
-  };
-
-  handleBuyerNumberChanges = (val) => {
-    this.setState({
-      buyerNumber: val
     })
   };
 
@@ -57,32 +59,69 @@ class Transaction extends Component {
     let price = this.state.price
     let fish = this.state.fish
     let quantity = this.state.quantity
+    let country = this.state.country
     let buyerName = this.state.buyer
-    let buyerNumber = this.state.buyerNumber
+
+    var data = {}
     
     if (!date) {
      console.log("date empty") 
+     return
     }
+
+    data.push({
+      key: "date",
+      value: date
+    })
 
     if (!price) {
       console.log("price empty") 
+      return
     }
+
+    data.push({
+      key: "price",
+      value: price
+    })
 
     if (!fish) {
       console.log("fish empty") 
+      return
     }
+
+    data.push({
+      key: "fishId",
+      value: fish
+    })
 
     if (!quantity) {
       console.log("quantity empty") 
+      return
     }
 
+    data.push({
+      key: "quantity",
+      value: quantity
+    })
+
+    if (!country) {
+      console.log("country empty")
+      data.push({
+        key: "countryId",
+        value: country
+      })
+    }
+    
     if (buyerName) {
-      
+      console.log("buyer name")
+      data.push({
+        key: "buyerId",
+        value: buyerName
+      })
     }
 
-    if (buyerNumber) {
-
-    }
+    console.log(data)
+    this.props.addNewTransaction(data)
   };
 
   render() {
@@ -102,4 +141,18 @@ class Transaction extends Component {
   }
 };
 
-export default Transaction;
+const mapStateToProps = state => {
+  return {
+    transaction: state.transaction
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addNewTransaction: (data) => {
+      dispatch(addNewTransaction(data))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Transaction);

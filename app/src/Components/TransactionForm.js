@@ -32,14 +32,14 @@ class TransactionTextFields extends Component {
         this.props.handleQuantityChanges(e.currentTarget.value);
         this.setState({fieldVal: e.currentTarget.value});
     };
-    
-    buyerUpdate = (e) => {
-        this.props.handleBuyerNameChanges(e.currentTarget.value);
+
+    countryUpdate = (e) => {
+        this.props.handleCountryChanges(e.currentTarget.value);
         this.setState({fieldVal: e.currentTarget.value});
     };
     
-    buyerNumberUpdate = (e) => {
-        this.props.handleBuyerNumberChanges(e.currentTarget.value);
+    buyerUpdate = (e) => {
+        this.props.handleBuyerNameChanges(e.currentTarget.value);
         this.setState({fieldVal: e.currentTarget.value});
     };
     
@@ -51,13 +51,13 @@ class TransactionTextFields extends Component {
     render() {
         return (
             <div>
-                <FormControl>
-                    <TextField
+                <TextField
                         id="date"
                         type="date"
                         defaultValue="MM-DD-YYYY"
                         onChange={this.dateUpdate}
-                    /><br />
+                /><br />
+                <FormControl>
                     <InputLabel htmlFor="price">Price in CAD</InputLabel>
                     <Input
                         id="price"
@@ -66,6 +66,7 @@ class TransactionTextFields extends Component {
                         startAdornment={<InputAdornment position="start">$</InputAdornment>}
                         onChange={this.priceUpdate}
                         />
+                </FormControl>
                     <br />
                     <TextField
                         id="fish-type"
@@ -79,8 +80,14 @@ class TransactionTextFields extends Component {
                         type="number"
                         onChange={this.quantityUpdate}
                     /><br />
-                </FormControl>
-                <FormControl>
+                {/* <FormControl> */}
+                    <TextField 
+                        id="country"
+                        label="Country of business"
+                        type="text"
+                        onChange={this.countryUpdate}
+                    />
+                    <br />
                     <TextField 
                         id="buyer-name"
                         label="Buyer/Company Name"
@@ -88,15 +95,9 @@ class TransactionTextFields extends Component {
                         placeholder="optional"
                         onChange={this.buyerUpdate}
                     />
-                    <br />
-                    <TextField 
-                        id="buyer-contact"
-                        label="Buyer Phone Number"
-                        type="number"
-                        placeholder="optional"
-                        onChange={this.buyerNumberUpdate}
-                    />
-                </FormControl>
+                {/* </FormControl> */}
+                <br />
+                <br />
                 <Button
                         id="submit-btn"
                         variant="raised"
