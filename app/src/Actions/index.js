@@ -24,7 +24,34 @@ export const addNewTransaction = (data) => {
         error => {
           // console.log(error);
         }
+      )}
+    }
+
+export const requestTransactions = () => {
+  return {
+    type: 'REQUEST_TRANSACTIONS'
+  }
+}
+
+export const fetchTransactions = () => {
+  return dispatch => {
+    dispatch(requestTransactions);
+    return axios.get(route('/transaction'))
+      .then(
+        response => {
+          dispatch(loadTransactions(response.data));
+        },
+        error => {
+          console.log(error);
+        }
       )
+  };
+}
+
+export const loadTransactions = transactions => {
+  return {
+    type: "LOAD_TRANSACTIONS",
+    transactions
   };
 }
 
@@ -121,16 +148,13 @@ export const loadFishes = fishes => {
 
 export const authenticateUser = (data) => {
   console.log(data)
-  let newData = JSON.stringify({
+  let newData = {
     phoneNumber: data.phoneNumber,
     password: data.password
-  })
+  };
   return dispatch => {
     dispatch(authenticate);
-    return axios.post(route('/login', newData, {
-      headers: {
-        'Content-Type': 'application/json',
-    }}))
+    return axios.post(route('/login', newData))
       .then(
         response => {
           console.log(response)
@@ -138,6 +162,26 @@ export const authenticateUser = (data) => {
         },
         error => {
           // console.log(error);
+        }
+      )}
+    }
+    
+export const requestBuyers = () => {
+  return {
+    type: 'REQUEST_BUYERS'
+  }
+}
+
+export const fetchBuyers = () => {
+  return dispatch => {
+    dispatch(requestBuyers);
+    return axios.get(route('/buyer'))
+      .then(
+        response => {
+          dispatch(loadBuyers(response.data));
+        },
+        error => {
+          console.log(error);
         }
       )
   };
@@ -148,4 +192,38 @@ export const authenticate = login => {
     type: "AUTHENTICATE",
     login
   }
+}
+export const loadBuyers = buyers => {
+  return {
+    type: "LOAD_BUYERS",
+    buyers
+  };
+}
+
+export const requestSellers = () => {
+  return {
+    type: 'REQUEST_SELLERS'
+  }
+}
+
+export const fetchSellers = () => {
+  return dispatch => {
+    dispatch(requestSellers);
+    return axios.get(route('/seller'))
+      .then(
+        response => {
+          dispatch(loadSellers(response.data));
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  };
+}
+
+export const loadSellers = sellers => {
+  return {
+    type: "LOAD_SELLERS",
+    sellers
+  };
 }

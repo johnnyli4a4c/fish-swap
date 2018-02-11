@@ -17,15 +17,10 @@ const headerData = [
   ];
 
 class TransactionTable extends React.Component {
-  constructor(props, context) {
-    super(props, context);
 
-    this.state = {
-      data: props.transactions
-    };
-  }
   render() {
-    const { data } = this.state;
+    const { transactions, countries, fishes, buyers, sellers } = this.props;
+    
     return (
       <div>
         <Table>
@@ -41,15 +36,47 @@ class TransactionTable extends React.Component {
             </TableRow>
         </TableHead>
         <TableBody>
-            {data.map(transaction => {
+            {transactions.map(transaction => {
             return (
-                <TableRow hover key={transaction.date}>
-                <TableCell>{transaction.seller.name}</TableCell>
-                <TableCell>{transaction.buyer.name}</TableCell>
-                <TableCell>{transaction.fish.name}</TableCell>
+                <TableRow hover key={
+                  transaction.buyerId + "-" + 
+                  transaction.sellerId + "-" + 
+                  transactions.price + "-" + 
+                  transaction.date }>
+                <TableCell>
+                {
+                    sellers.length !==0 &&
+                    sellers.find(seller => {
+                      return seller.id === transaction.sellerId
+                    }).phoneNumber
+                  }
+                </TableCell>
+                <TableCell>
+                  {
+                    buyers.length !==0 &&
+                    buyers.find(buyer => {
+                      return buyer.id === transaction.buyerId
+                    }).phoneNumber
+                  }
+                  </TableCell>
+                <TableCell>
+                  {
+                    fishes.length !==0 &&
+                    fishes.find(fish => {
+                      return fish.id === transaction.fishId
+                    }).name
+                  }
+                </TableCell>
                 <TableCell>{transaction.price}</TableCell>
                 <TableCell>{transaction.quantity}</TableCell>
-                <TableCell>{transaction.country.name}</TableCell>
+                <TableCell>
+                  {
+                    countries.length !==0 &&
+                    countries.find(country => {
+                      return country.id === transaction.countryId
+                    }).name
+                  }
+                </TableCell>
                 <TableCell>{transaction.date}</TableCell>
                 </TableRow>
               );

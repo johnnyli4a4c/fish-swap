@@ -36,7 +36,8 @@ class FilterFishTextField extends React.Component {
     const { classes } = this.props;
     return (
       <TextField
-        placeholder="Eg: salmon, canada"
+        label="Filter"
+        placeholder="Eg: salmon"
         onChange={this.onChangeHandler}
         InputProps={{
           disableUnderline: true,
