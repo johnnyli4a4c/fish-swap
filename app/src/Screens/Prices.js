@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { fetchPrices, fetchCountries, fetchFishes } from '../Actions';
+import PriceTable from '../Components/PriceTable.js';
 
 class Prices extends Component {
-  render() {
-    const { prices } = this.props;
+  componentWillMount(){
+    this.props.fetchPrices();
+    this.props.fetchCountries();
+    this.props.fetchFishes();
+  }
 
+  render() {
+    const { prices, countries, fishes } = this.props;
     return (
       <div className="Prices">
-        <header className="Prices-header">
-          <h1 className="Prices-title">Prices</h1>
-        </header>
-        <ul>
-          Prices: {prices.map(price => {
-            return <li key={price.fishId + "-" + price.countryId}>{JSON.stringify(price)}</li>
-          })}
-        </ul>
-        <p className="Prices-intro">
-          This will eventually be table.
-        </p>
+          <PriceTable prices={prices} countries={countries} fishes={fishes}/>
       </div>
     );
   }
@@ -25,8 +22,24 @@ class Prices extends Component {
 
 const mapStateToProps = state => {
   return {
-    prices: state.prices
+    prices: state.prices,
+    countries: state.countries,
+    fishes: state.fishes
   };
 }
 
-export default connect(mapStateToProps)(Prices);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchPrices: () => {
+      dispatch(fetchPrices())
+    },
+    fetchCountries: () => {
+      dispatch(fetchCountries())
+    },
+    fetchFishes: () => {
+      dispatch(fetchFishes())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Prices);
