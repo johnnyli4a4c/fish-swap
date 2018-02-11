@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import FishSwapApp from './Reducers';
-import { addPrice } from './Actions'
+import { addPrice, addTransaction } from './Actions'
 import { createStore } from 'redux'
 import './index.css';
 import Theme from './Themes/Theme.js';
@@ -40,10 +40,63 @@ const mock_price_data = [
   },
 ];
 
+const mock_transaction_data = [
+  {
+    date: '2018-01-01',
+    seller: {
+      id: 1,
+      name: 'Randy',
+      phoneNumber: '(xxx) xxx-xxxx'
+    },
+    buyer: {
+      id: 2,
+      name: 'Johnny',
+      phoneNumber: '(xxx) xxx-xxxx'
+    },
+    fish: {
+      id: 1,
+      name: 'Salmon' 
+    },
+    price: 10.10,
+    quantity: 5,
+    country: {
+      id: 1,
+      name: 'Canada'
+    }
+  },
+  {
+    date: '2018-01-02',
+    seller: {
+      id: 2,
+      name: 'Johnny',
+      phoneNumber: '(xxx) xxx-xxxx'
+    },
+    buyer: {
+      id: 1,
+      name: 'Randy',
+      phoneNumber: '(xxx) xxx-xxxx'
+    },
+    fish: {
+      id: 2,
+      name: 'Tuna' 
+    },
+    price: 11.10,
+    quantity: 2,
+    country: {
+      id: 2,
+      name: 'US'
+    }
+  }
+];
+
 let store = createStore(FishSwapApp)
 
 mock_price_data.forEach(price => {
   store.dispatch(addPrice(price));
+})
+
+mock_transaction_data.forEach(transaction => {
+  store.dispatch(addTransaction(transaction));
 })
 
 ReactDOM.render(
