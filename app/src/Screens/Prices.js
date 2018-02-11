@@ -8,10 +8,7 @@ class Prices extends Component {
 
     return (
       <div className="Prices">
-        <header className="Prices-header">
-        </header>
-          <PriceTable prices={prices}
-          />
+          <PriceTable prices={prices}/>
       </div>
     );
   }
