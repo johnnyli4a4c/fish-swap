@@ -2,58 +2,10 @@ import React from 'react';
 import Table, {
   TableBody,
   TableCell,
-  TableHead,
   TableRow,
-  TableSortLabel,
 } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
-
-let counter = 0;
-function createData(fish, min, max, avg, country) {
-  counter += 1;
-  return { id: counter, fish, min, max, avg, country };
-}
-
-const headerData = [
-  { id: 'fish', label: 'Fish' },
-  { id: 'min', label: 'Min Price' },
-  { id: 'max', label: 'Max Price' },
-  { id: 'avg', label: 'Avg Price' },
-  { id: 'country', label: 'Country' },
-];
-
-class PriceTableHead extends React.Component {
-  createSortHandler = property => event => {
-    this.props.onRequestSort(event, property);
-  };
-
-  render() {
-    const { order, orderBy } = this.props;
-
-    return (
-      <TableHead>
-        <TableRow>
-          {headerData.map(header => {
-            return (
-              <TableCell
-                key={header.id}
-                sortDirection={orderBy === header.id ? order : false}
-              >
-                <TableSortLabel
-                  active={orderBy === header.id}
-                  direction={order}
-                  onClick={this.createSortHandler(header.id)}
-                >
-                  {header.label}
-                </TableSortLabel>
-              </TableCell>
-            );
-          }, this)}
-        </TableRow>
-      </TableHead>
-    );
-  }
-}
+import PriceTableHead from '../Components/PriceTableHead.js' 
 
 class PriceTable extends React.Component {
   constructor(props, context) {
@@ -62,10 +14,7 @@ class PriceTable extends React.Component {
     this.state = {
       order: 'asc',
       orderBy: '',
-      data: [
-        createData('Salmon', 1, 3, 2, 'Canada'),
-        createData('Sake', 2, 4, 3, 'US'),
-      ],
+      data: props.prices
     };
 
     console.log(props)
@@ -102,12 +51,12 @@ class PriceTable extends React.Component {
             <TableBody>
               {data.map(price => {
                 return (
-                  <TableRow hover key={price.id}>
-                    <TableCell>{price.fish}</TableCell>
+                  <TableRow hover key={price.fish.id}>
+                    <TableCell>{price.fish.name}</TableCell>
                     <TableCell>{price.min}</TableCell>
                     <TableCell>{price.max}</TableCell>
-                    <TableCell>{price.avg}</TableCell>
-                    <TableCell>{price.country}</TableCell>
+                    <TableCell>{price.average}</TableCell>
+                    <TableCell>{price.country.name}</TableCell>
                   </TableRow>
                 );
               })}

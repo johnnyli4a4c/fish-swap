@@ -41,35 +41,6 @@ const mock_countries_data = [
   }
 ];
 
-const mock_price_data = [
-  {
-    fish: {
-      id: 1,
-      name: 'Salmon' 
-    },
-    min: '$1',
-    max: '$3',
-    average: '$2',
-    country: {
-      id: 1,
-      name: 'Canada'
-    }
-  },
-  {
-    fish: {
-      id: 2,
-      name: 'Sake' 
-    },
-    min: '$3',
-    max: '$5',
-    average: '$4',
-    country: {
-      id: 2,
-      name: 'US'
-    }
-  },
-];
-
 class App extends Component {
   render() {
     const { pathname } = this.props.location;
@@ -97,7 +68,6 @@ class App extends Component {
             <Route path="/prices" 
               component={Prices}
               fish={this.mock_fish_data}
-              prices={this.mock_price_data} 
               countries={this.mock_countries_data}/>
             <Route path="/add" component={ToDo} />
             <Route path="/history" component={ToDo} />

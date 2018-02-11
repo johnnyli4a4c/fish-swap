@@ -25,13 +25,8 @@ class Prices extends Component {
     return (
       <div className="Prices">
         <header className="Prices-header">
-          <h1 className="Prices-title">Prices</h1>
+          <h1 className="Prices-title"></h1>
         </header>
-        <ul>
-          Prices: {prices.map(price => {
-            return <li key={price.fishId + "-" + price.countryId}>{JSON.stringify(price)}</li>
-          })}
-        </ul>
           {/* <FishFilter 
             state={this.state} 
             updateState={this.updateState} 
@@ -43,8 +38,7 @@ class Prices extends Component {
             countries={this.props.countries}
           /> */}
           <PriceTable 
-            state={this.state} 
-            prices={this.props.prices}
+            prices={prices}
           />
       </div>
     );

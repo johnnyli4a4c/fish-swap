@@ -11,33 +11,38 @@ import { MuiThemeProvider } from 'material-ui/styles';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-const mock_data_price = [
+const mock_price_data = [
   {
-    fishId: 1,
-    countryId: 1,
-    minPrice: 1.00,
-    maxPrice: 3.00,
-    averagePrice: 2.34
+    fish: {
+      id: 1,
+      name: 'Salmon' 
+    },
+    min: '1',
+    max: '3',
+    average: '2',
+    country: {
+      id: 1,
+      name: 'Canada'
+    }
   },
   {
-    fishId: 1,
-    countryId: 2,
-    minPrice: 3.00,
-    maxPrice: 6.00,
-    averagePrice: 3.93
+    fish: {
+      id: 2,
+      name: 'Tuna' 
+    },
+    min: '3',
+    max: '5',
+    average: '4',
+    country: {
+      id: 2,
+      name: 'US'
+    }
   },
-  {
-    fishId: 2,
-    countryId: 1,
-    minPrice: 2.28,
-    maxPrice: 12.20,
-    averagePrice: 8.09
-  }
 ];
 
 let store = createStore(FishSwapApp)
 
-mock_data_price.forEach(price => {
+mock_price_data.forEach(price => {
   store.dispatch(addPrice(price));
 })
 
