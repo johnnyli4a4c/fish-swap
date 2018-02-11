@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
+import LoginForm from '../Components/LoginForm.js'
 
 class Login extends Component {
+
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     isLoggedIn: false
+  //   };
+
+    // this.handleIsLoggedIn = this.handleIsLoggedIn.bind(this)
+  }
+
+  // handleIsLoggedIn = (value) => {
+  //   this.setState({
+  //     isLoggedIn: value
+  //   })
+  // };
+
   render() {
     return (
-      <div className="Login">
-        <header className="Login-header">
-          <h1 className="Login-title">Login</h1>
-        </header>
-        <p className="Login-intro">
-          This will eventually be a login form.
-        </p>
+      <div>
+        <LoginForm
+          // login = {this.handleIsLoggedIn}
+        />
       </div>
     );
   }

@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MainMenu from './Components/MainMenu.js';
 import Login from './Screens/Login.js';
 import Prices from './Screens/Prices.js';
+import Transaction from './Screens/Transaction.js';
 
 const mock_price_data = [];
 
@@ -18,6 +19,9 @@ class App extends Component {
           <MainMenu />
           <section>
             <Login />
+          </section>
+          <section>
+            <Transaction />
           </section>
           <section>
             <Prices prices={mock_price_data} />
