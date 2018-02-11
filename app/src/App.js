@@ -6,6 +6,7 @@ import Prices from './Screens/Prices.js';
 import ToDo from './Screens/ToDo.js';
 import Reboot from 'material-ui/Reboot';
 import './App.css';
+import Transaction from './Screens/Transaction.js';
 
 class App extends Component {
   render() {
@@ -32,7 +33,7 @@ class App extends Component {
             }
             <Route path="/login" component={Login} />
             <Route path="/prices" component={Prices} />
-            <Route path="/add" component={ToDo} />
+            <Route path="/add" component={Transaction} />
             <Route path="/history" component={ToDo} />
           </section>
         </MainTemplate>
