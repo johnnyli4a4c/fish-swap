@@ -19,7 +19,7 @@ const headerData = [
 class TransactionTable extends React.Component {
 
   render() {
-    const { transactions, countries, fishes } = this.props;
+    const { transactions, countries, fishes, buyers, sellers } = this.props;
     
     return (
       <div>
@@ -43,8 +43,22 @@ class TransactionTable extends React.Component {
                   transaction.sellerId + "-" + 
                   transactions.price + "-" + 
                   transaction.date }>
-                <TableCell>{transaction.sellerId}</TableCell>
-                <TableCell>{transaction.buyerId}</TableCell>
+                <TableCell>
+                {
+                    sellers.length !==0 &&
+                    sellers.find(seller => {
+                      return seller.id === transaction.sellerId
+                    }).phoneNumber
+                  }
+                </TableCell>
+                <TableCell>
+                  {
+                    buyers.length !==0 &&
+                    buyers.find(buyer => {
+                      return buyer.id === transaction.buyerId
+                    }).phoneNumber
+                  }
+                  </TableCell>
                 <TableCell>
                   {
                     fishes.length !==0 &&

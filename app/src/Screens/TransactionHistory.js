@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import TransactionTable from '../Components/TransactionTable';
-import { fetchTransactions, fetchCountries, fetchFishes } from '../Actions';
+import { fetchTransactions, fetchCountries, fetchFishes, fetchBuyers, fetchSellers } from '../Actions';
 
 class TransactionHistory extends Component {
   componentWillMount(){
     this.props.fetchTransactions();
     this.props.fetchCountries();
     this.props.fetchFishes();
+    this.props.fetchBuyers();
+    this.props.fetchSellers();
   }
 
   render() {
-    const { transactions, countries, fishes } = this.props;
+    const { transactions, countries, fishes, buyers, sellers} = this.props;
 
     return (
       <div className="TransactionHistory">
@@ -21,6 +23,8 @@ class TransactionHistory extends Component {
           transactions={transactions}
           countries={countries}
           fishes={fishes}
+          buyers={buyers}
+          sellers={sellers}
           />
       </div>
     );
@@ -31,7 +35,9 @@ const mapStateToProps = state => {
   return {
     transactions: state.transactions,
     countries: state.countries,
-    fishes: state.fishes
+    fishes: state.fishes,
+    buyers: state.buyers,
+    sellers: state.sellers
   };
 }
 
@@ -45,6 +51,12 @@ const mapDispatchToProps = dispatch => {
     },
     fetchFishes: () => {
       dispatch(fetchFishes())
+    },
+    fetchBuyers: () => {
+      dispatch(fetchBuyers())
+    },
+    fetchSellers: () => {
+      dispatch(fetchSellers())
     }
   }
 }

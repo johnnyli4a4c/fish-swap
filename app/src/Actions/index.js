@@ -129,3 +129,59 @@ export const loadFishes = fishes => {
     fishes
   };
 }
+
+export const requestBuyers = () => {
+  return {
+    type: 'REQUEST_BUYERS'
+  }
+}
+
+export const fetchBuyers = () => {
+  return dispatch => {
+    dispatch(requestBuyers);
+    return axios.get(route('/buyer'))
+      .then(
+        response => {
+          dispatch(loadBuyers(response.data));
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  };
+}
+
+export const loadBuyers = buyers => {
+  return {
+    type: "LOAD_BUYERS",
+    buyers
+  };
+}
+
+export const requestSellers = () => {
+  return {
+    type: 'REQUEST_SELLERS'
+  }
+}
+
+export const fetchSellers = () => {
+  return dispatch => {
+    dispatch(requestSellers);
+    return axios.get(route('/seller'))
+      .then(
+        response => {
+          dispatch(loadSellers(response.data));
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  };
+}
+
+export const loadSellers = sellers => {
+  return {
+    type: "LOAD_SELLERS",
+    sellers
+  };
+}
