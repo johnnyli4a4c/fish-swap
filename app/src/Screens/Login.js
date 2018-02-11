@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoginForm from '../Components/LoginForm.js'
+// import LoginForm from '../Components/LoginForm.js'
 
 class Login extends Component {
 
@@ -21,9 +21,9 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <LoginForm
+        {/* <LoginForm
           // login = {this.handleIsLoggedIn}
-        />
+        /> */}
       </div>
     );
   }
