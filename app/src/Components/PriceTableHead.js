@@ -15,9 +15,9 @@ const headerData = [
   ];
   
 class PriceTableHead extends React.Component {
-  createSortHandler = property => event => {
-      this.props.onRequestSort(event, property);
-  };
+  // createSortHandler = property => event => {
+  //     this.props.onRequestSort(event, property);
+  // };
 
   render() {
     const { order, orderBy } = this.props;
@@ -34,7 +34,7 @@ class PriceTableHead extends React.Component {
                 <TableSortLabel
                   active={orderBy === header.id}
                   direction={order}
-                  onClick={this.createSortHandler(header.id)}
+                  // onClick={this.createSortHandler(header.id)}
                   >
                   {header.label}
                 </TableSortLabel>

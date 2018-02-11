@@ -57,7 +57,7 @@ class PriceTable extends React.Component {
           <PriceTableHead
             order={order}
             orderBy={orderBy}
-            onRequestSort={this.handleRequestSort}
+            // onRequestSort={this.handleRequestSort}
           />
           <TableBody>
             {prices.filter(filterPrice).map(price => {
