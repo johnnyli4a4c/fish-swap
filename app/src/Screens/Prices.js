@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import PriceTable from '../Components/PriceTable.js'; 
+import { fetchPrices, fetchCountries, fetchFishes } from '../Actions';
+import PriceTable from '../Components/PriceTable.js';
 
 class Prices extends Component {
-  render() {
-    const { prices } = this.props;
+  componentWillMount(){
+    this.props.fetchPrices();
+    this.props.fetchCountries();
+    this.props.fetchFishes();
+  }
 
+  render() {
+    const { prices, countries, fishes } = this.props;
     return (
       <div className="Prices">
-          <PriceTable prices={prices}/>
+          <PriceTable prices={prices} countries={countries} fishes={fishes}/>
       </div>
     );
   }
@@ -16,8 +22,24 @@ class Prices extends Component {
 
 const mapStateToProps = state => {
   return {
-    prices: state.prices
+    prices: state.prices,
+    countries: state.countries,
+    fishes: state.fishes
   };
 }
 
-export default connect(mapStateToProps)(Prices);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchPrices: () => {
+      dispatch(fetchPrices())
+    },
+    fetchCountries: () => {
+      dispatch(fetchCountries())
+    },
+    fetchFishes: () => {
+      dispatch(fetchFishes())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Prices);

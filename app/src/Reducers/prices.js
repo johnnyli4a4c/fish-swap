@@ -5,6 +5,8 @@ const prices = (state = [], action) => {
         ...state,
         action.price
     ]
+    case 'LOAD_PRICES':
+      return action.prices
     default:
       return state
   }

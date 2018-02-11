@@ -5,7 +5,6 @@ import Table, {
   TableHead,
   TableRow,
 } from 'material-ui/Table';
-import Paper from 'material-ui/Paper';
 
 const headerData = [
     { id: 'seller', label: 'Seller' },
@@ -27,7 +26,6 @@ class TransactionTable extends React.Component {
   }
   render() {
     const { data } = this.state;
-  
     return (
       <div>
         <Table>

@@ -1,44 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk'
 import FishSwapApp from './Reducers';
-import { addPrice, addTransaction } from './Actions'
-import { createStore } from 'redux'
+import { addTransaction } from './Actions'
 import './index.css';
 import Theme from './Themes/Theme.js';
 import { MuiThemeProvider } from 'material-ui/styles';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-
-const mock_price_data = [
-  {
-    fish: {
-      id: 1,
-      name: 'Salmon' 
-    },
-    min: '1',
-    max: '3',
-    average: '2',
-    country: {
-      id: 1,
-      name: 'Canada'
-    }
-  },
-  {
-    fish: {
-      id: 2,
-      name: 'Tuna' 
-    },
-    min: '3',
-    max: '5',
-    average: '4',
-    country: {
-      id: 2,
-      name: 'US'
-    }
-  },
-];
 
 const mock_transaction_data = [
   {
@@ -55,7 +27,7 @@ const mock_transaction_data = [
     },
     fish: {
       id: 1,
-      name: 'Salmon' 
+      name: 'Salmon'
     },
     price: 10.10,
     quantity: 5,
@@ -78,7 +50,7 @@ const mock_transaction_data = [
     },
     fish: {
       id: 2,
-      name: 'Tuna' 
+      name: 'Tuna'
     },
     price: 11.10,
     quantity: 2,
@@ -89,11 +61,7 @@ const mock_transaction_data = [
   }
 ];
 
-let store = createStore(FishSwapApp)
-
-mock_price_data.forEach(price => {
-  store.dispatch(addPrice(price));
-})
+let store = createStore(FishSwapApp, applyMiddleware(thunkMiddleware))
 
 mock_transaction_data.forEach(transaction => {
   store.dispatch(addTransaction(transaction));

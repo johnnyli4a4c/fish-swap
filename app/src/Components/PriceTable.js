@@ -15,25 +15,24 @@ class PriceTable extends React.Component {
       order: 'asc',
       orderBy: '',
       filterBy: '',
-      data: props.prices
     };
   }
 
-  handleRequestSort = (event, property) => {
-    const orderBy = property;
-    let order = 'desc';
+  // handleRequestSort = (event, property) => {
+  //   const orderBy = property;
+  //   let order = 'desc';
 
-    if (this.state.orderBy === property && this.state.order === 'desc') {
-      order = 'asc';
-    }
+  //   if (this.state.orderBy === property && this.state.order === 'desc') {
+  //     order = 'asc';
+  //   }
 
-    const data =
-      order === 'desc'
-        ? this.state.data.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
-        : this.state.data.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1));
+  //   const data =
+  //     order === 'desc'
+  //       ? this.state.data.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
+  //       : this.state.data.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1));
 
-    this.setState({ data, order, orderBy });
-  };
+  //   this.setState({ data, order, orderBy });
+  // };
 
   handleRequestFilter = (value) => {
     const filterBy = value;
@@ -41,8 +40,9 @@ class PriceTable extends React.Component {
   }
 
   render() {
-    const { data, order, orderBy, filterBy } = this.state;
-  
+    const { order, orderBy, filterBy } = this.state;
+    const { prices, countries, fishes } = this.props;
+
     return (
       <div>
         <FilterFishTextField onRequestFilter={this.handleRequestFilter}/>
@@ -53,16 +53,28 @@ class PriceTable extends React.Component {
             onRequestSort={this.handleRequestSort}
           />
           <TableBody>
-            {data.filter(function (price) {
+            {prices.filter(function (price) {
               return filterBy === '' || price.fish.name.toLowerCase().indexOf(filterBy.toLowerCase()) !== -1;
             }).map(price => {
               return (
-                <TableRow hover key={price.fish.id}>
-                  <TableCell>{price.fish.name}</TableCell>
+                <TableRow hover key={price.fishId}>
+                  <TableCell>
+                    {fishes.length !== 0 &&
+                      fishes.find(fish => {
+                        return fish.id === price.fishId
+                      }).name
+                    }
+                  </TableCell>
                   <TableCell>{price.min}</TableCell>
                   <TableCell>{price.max}</TableCell>
                   <TableCell>{price.average}</TableCell>
-                  <TableCell>{price.country.name}</TableCell>
+                  <TableCell>
+                    {countries.length !== 0 &&
+                      countries.find(country => {
+                        return country.id === price.countryId
+                      }).name
+                    }
+                  </TableCell>
                 </TableRow>
               );
             })}
