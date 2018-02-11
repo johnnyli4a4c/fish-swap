@@ -5,7 +5,9 @@ import Table, {
   TableRow,
 } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
 import PriceTableHead from '../Components/PriceTableHead.js' 
+import FilterFishTextField from '../Components/FilterFishTextField.js' 
 
 class PriceTable extends React.Component {
   constructor(props, context) {
@@ -14,10 +16,9 @@ class PriceTable extends React.Component {
     this.state = {
       order: 'asc',
       orderBy: '',
+      filterBy: '',
       data: props.prices
     };
-
-    console.log(props)
   }
 
   handleRequestSort = (event, property) => {
@@ -36,12 +37,18 @@ class PriceTable extends React.Component {
     this.setState({ data, order, orderBy });
   };
 
+  handleRequestFilter = (value) => {
+    const filterBy = value;
+    this.setState({ filterBy });
+  }
+
   render() {
-    const { data, order, orderBy } = this.state;
+    const { data, order, orderBy, filterBy } = this.state;
   
     return (
       <Paper>
         <div>
+          <FilterFishTextField onRequestFilter={this.handleRequestFilter}/>
           <Table>
             <PriceTableHead
               order={order}
@@ -49,7 +56,9 @@ class PriceTable extends React.Component {
               onRequestSort={this.handleRequestSort}
             />
             <TableBody>
-              {data.map(price => {
+              {data.filter(function (price) {
+                return filterBy === '' || price.fish.name.toLowerCase().indexOf(filterBy.toLowerCase()) != -1;
+              }).map(price => {
                 return (
                   <TableRow hover key={price.fish.id}>
                     <TableCell>{price.fish.name}</TableCell>
