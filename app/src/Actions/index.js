@@ -11,6 +11,34 @@ export const addPrice = price => {
   }
 }
 
+export const requestTransactions = () => {
+  return {
+    type: 'REQUEST_TRANSACTIONS'
+  }
+}
+
+export const fetchTransactions = () => {
+  return dispatch => {
+    dispatch(requestTransactions);
+    return axios.get(route('/transaction'))
+      .then(
+        response => {
+          dispatch(loadTransactions(response.data));
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  };
+}
+
+export const loadTransactions = transactions => {
+  return {
+    type: "LOAD_TRANSACTIONS",
+    transactions
+  };
+}
+
 export const addTransaction = transaction => {
   return {
     type: 'ADD_TRANSACTION',
